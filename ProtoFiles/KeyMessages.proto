@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_package = "com.server.Protobufs";
+option java_outer_classname = "KeyMessages";
+
+import "LoginMessages.proto";
+
+enum MessageType
+{
+	MT_UNSPECIFIED = 0;
+	MT_LOGIN = 1;
+	MT_REGISTRATION = 2;
+}
+
+message EncryptedMessage
+{ 
+	string message = 1;
+	string iv = 2;
+	MessageType messageType = 3;
+}
+
+message KeyExchange
+{
+	string publicKey = 1;
+	MsgState state = 2;
+}
+
+message Wrapper
+{
+	oneof Messages 
+    { 
+		CheckRegParameterStatus checkRegParameterStatus = 1;
+		Registration registration = 2;
+		Login login = 3;
+		EncryptedMessage encryptedMessage = 4;
+		KeyExchange keyexchange = 5;
+	}
+}

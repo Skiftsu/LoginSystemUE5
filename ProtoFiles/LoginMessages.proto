@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_package = "com.server.Protobufs";
+option java_outer_classname = "LoginMessages";
+
+message CheckRegParameterStatus
+{
+	oneof v1 
+    { 
+		string login = 1;
+		string mail = 2;
+		bool loginStatus = 3; 
+		bool mailStatus = 4;
+	}
+}
+
+enum MsgState
+{
+	MS_ERROR = 0;
+	MS_INIT = 1;
+	MS_SUCCESSFUL = 2;
+}
+
+message Login 
+{
+	string mail = 1;
+	string hash	= 2;
+	MsgState state = 3;
+}
+
+message Registration 
+{
+	string login = 1;
+	string hash = 2;
+	string mail = 3;
+	MsgState state = 4;
+}
